@@ -7,6 +7,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
+import MenuIcon from '@material-ui/icons/Menu';
 
 
 
@@ -54,6 +55,8 @@ const StyledMenu = withStyles({
   })((props) => (
 	<Menu
 	  elevation={0}
+	  // Estää pomppivan taustan (padding ongelma)
+	  disableScrollLock='true'
 	  getContentAnchorEl={null}
 	  anchorOrigin={{
 		vertical: 'bottom',
@@ -96,16 +99,26 @@ function Header() {
   	const handleClick = (event) => {
     	setAnchorEl(event.currentTarget);
 
-    	console.log('I was triggered')
   	};
 
-  	const handleClose = () => {
-    	setAnchorEl(null);
+  	const handleClose = (value) => {
+		setAnchorEl(null);
+		
+		// Menu event logic(s)
+		if (value == 1) {
+			alert("Päädyit Tarinaan");
+		}
+		else if (value == 2) {
+			alert("Päädyit Ilmoittautumiseen");
+		}
+		else if (value == 3) {
+			alert("Päädyit Infoon");
+		}
+		else {
+			
+		}
+		
   	};
-
-  	function handleItemClick (value) {
-		alert(`value, ${value}`);
-  	}
 
 	return (
 	<div className={styling.root}>
@@ -114,7 +127,7 @@ function Header() {
 				
 				<h1 className={styling.appbarTitle}></h1>
 				<IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-					<SortIcon className={styling.icon} 
+					<MenuIcon className={styling.icon} 
             			/*style={{ 
                 			fontSize: 30, 
                 			color: '#fff'
@@ -126,14 +139,23 @@ function Header() {
         			anchorEl={anchorEl}
         			keepMounted
         			open={Boolean(anchorEl)}
-        			onClose={handleClose}
+					onClose={handleClose}
+					
       			>
-        			<MenuItem onClick={handleClose}>Profile</MenuItem>
-        			<MenuItem onClick={handleClose}>My account</MenuItem>
-        			<MenuItem onClick={handleClose}>Logout</MenuItem>
+					
+					<MenuItem 
+						value={1} onClick={event => handleClose(event.target.value)}>Tarina
+					</MenuItem>
+					<MenuItem 
+						value={2} onClick={event => handleClose(event.target.value)}>Ilmoittautuminen
+					</MenuItem>
+					<MenuItem 
+						value={3} onClick={event => handleClose(event.target.value)}>Info
+					</MenuItem>
       			</StyledMenu>
 			</Toolbar>
 		</AppBar>
+		
 		<Collapse 
 			in={checked}
 			{ ...(checked ? {timeoouot: 1000 } : {})}
