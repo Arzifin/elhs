@@ -6,7 +6,6 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Button from '@material-ui/core/Button';
 
 
 
@@ -67,10 +66,9 @@ const StyledMenu = withStyles({
 	/>
 ));
 
-// Klikkauksen aiheuttama taustaväri (tietenkin) vaihdettavissa
+  // Klikkauksen aiheuttama taustaväri (tietenkin) vaihdettavissa
 // OPT1: #E6BE8A
 // OPT2: #535454
-// TÄLLÄ HETKELLÄ KOMMENTOITU POIS, KOSKA TYYLITTELYÄ EI TARVITA
 const StyledMenuItem = withStyles((theme) => ({
 	root: {
 	  '&:focus': {
@@ -113,24 +111,37 @@ function Header() {
 			<Toolbar className={styling.appbarWrapper}>
 				
 				<h1 className={styling.appbarTitle}></h1>
-				<IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-					<SortIcon className={styling.icon} 
-            			/*style={{ 
+				<IconButton
+        			aria-controls="customized-menu"
+        			aria-haspopup="true"
+        			onClick={handleClick}
+        			style={{ 
+            			color: '#fff'
+        			}}
+      			>
+        			<SortIcon className={styling.icon} 
+            			style={{ 
                 			fontSize: 30, 
                 			color: '#fff'
-            			}}*/
+            			}}
         			/>
-      			</IconButton>
+	  			</IconButton>
       			<StyledMenu
-        			id="simple-menu"
+        			id="customized-menu"
         			anchorEl={anchorEl}
         			keepMounted
         			open={Boolean(anchorEl)}
         			onClose={handleClose}
-      			>
-        			<MenuItem onClick={handleClose}>Profile</MenuItem>
-        			<MenuItem onClick={handleClose}>My account</MenuItem>
-        			<MenuItem onClick={handleClose}>Logout</MenuItem>
+      			>  
+        		<StyledMenuItem onClick={() => handleItemClick(1)}>
+          			<ListItemText primary="Tarina" />
+        		</StyledMenuItem>
+        		<StyledMenuItem onClick={() => handleItemClick(2)}> 
+          			<ListItemText primary="Ilmoittautuminen" />
+        		</StyledMenuItem>
+        		<StyledMenuItem onClick={() => handleItemClick(3)}>
+          			<ListItemText primary="Info" />
+        		</StyledMenuItem>
       			</StyledMenu>
 			</Toolbar>
 		</AppBar>

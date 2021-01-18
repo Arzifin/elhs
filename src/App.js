@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import Header from './module/Header';
+import Story from './module/Story';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,6 +24,7 @@ function App() {
     <div className={styling.root}>
       <CssBaseline/>
       <Header/>
+      <Story/>
     </div>
   );
 }
